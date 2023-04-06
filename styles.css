@@ -1,0 +1,18 @@
+@font-face {
+    font-family: "Milligram Text Regular";
+    src: url("./public/fonts/Milligram/MilligramText-Regular.ttf");
+}
+
+@font-face {
+    font-family: "Milligram Text Medium";
+    src: url("./public/fonts/Milligram/MilligramText-Medium.ttf");
+}
+
+body {
+    font-family: "Cascadia Mono";
+    font-weight: bold;
+}
+
+p {
+    font-size: 5px;
+}
