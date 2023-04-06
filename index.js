@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require("path");
+const cors = require("cors");
 
 const app = express();
 
@@ -10,13 +11,19 @@ app.use('/static', express.static(__dirname + '/public'));
 // Parse incoming request bodies as JSON
 app.use(bodyParser.json());
 
+app.use(cors({
+    origin: '*'
+}));
+
 app.get('/',function(req,res){
     res.sendFile(path.join(__dirname+'/email-template.html'));
     //__dirname : It will resolve to your project folder.
 });
 
 // POST endpoint to send an email
-app.post('/send-email', (req, res) => {
+app.post('/send-email',cors({
+    origin: '*'
+}), (req, res) => {
     // Read the email template file
     const emailTemplate = fs.readFileSync('email-template.html', 'utf8');
 
