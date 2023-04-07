@@ -13,8 +13,15 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", '*'); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
+    res.header(
+
+        'Access-Control-Allow-Headers',
+
+        'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version'
+
+    ),
+        res.header('Access-Control-Allow-Methods', 'GET,OPTIONS,PATCH,DELETE,POST,PUT')
+        next();
 });
 
 app.use('/static', express.static(__dirname + '/public'));
