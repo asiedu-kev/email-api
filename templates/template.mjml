@@ -2,8 +2,13 @@
   <mj-body>
     <mj-section>
       <mj-column>
-        <mj-image width="200px" src="https://email-api-puqm.onrender.com/static/icons/logo%20masewa%20version%20noir.png"></mj-image>
+        <mj-image width="200px" margin-bottom="50rem"  src="https://email-api-puqm.onrender.com/static/icons/logo%20masewa%20version%20noir.png"></mj-image>
         <mj-divider border-color="#eee"></mj-divider>
+        <mj-image width="700px" src="https://email-api-puqm.onrender.com/static/images/Image_1.png"></mj-image>
+        <mj-image width="700px" src="https://email-api-puqm.onrender.com/static/images/Image_2.png"></mj-image>
+        <mj-image width="700px" src="https://email-api-puqm.onrender.com/static/images/Image_3.png"></mj-image>
+        <mj-image width="700px" src="https://email-api-puqm.onrender.com/static/images/Image_4.png"></mj-image>
+        <mj-image width="700px" src="https://email-api-puqm.onrender.com/static/images/Image_5.png"></mj-image>
       </mj-column>
     </mj-section>
   </mj-body>
