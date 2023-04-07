@@ -3,7 +3,9 @@ const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 const fs = require('fs');
 const path = require("path");
-const cors = require("cors");
+const mjml2html = require('mjml');
+const Mustache = require('mustache');
+let htmlToText = require(`nodemailer-html-to-text`).htmlToText
 
 const app = express();
 // Parse incoming request bodies as JSON
@@ -41,36 +43,37 @@ app.get('/',function(req,res, next){
 });
 
 // POST endpoint to send an email
-app.post('/send-email' ,(req, res, next) => {
+app.post('/send-email' ,async (req, res, next) => {
+    console.log("i")
 
-    console.log(req.body);
-    // Read the email template file
-    const emailTemplate = fs.readFileSync('email-template.html', 'utf8');
-
-    // Replace placeholders in the email template with data from the request body
-    const emailHtml = emailTemplate.replace(/{{name}}/g, req.body.name);
-
-    // Create a transporter object to send the email
-    // const transporter = nodemailer.createTransport({
-    //     service: 'gmail',
-    //     auth: {
-    //         user: 'asiedukevin050@gmail.com',
-    //         pass: 'Godbless2019'
-    //     }
-    // });
-
-    // const mailOptions = {
-    //     host: process.env.SMTP_HOST || "smtp.mailtrap.io",
-    //     port: parseInt(process.env.SMTP_PORT || "2525"),
-    //     secure: false,
-    //     auth: {
-    //         user: process.env.SMTP_USER || "e7a68055d630f3",
-    //         pass: process.env.SMTP_PASSWORD || "74f0aeb20695c9",
-    //     },
-    // }
+    // console.log(req.body);
+    // // Read the email template file
+    // const emailTemplate = fs.readFileSync('email-template.html', 'utf8');
+    //
+    // // Replace placeholders in the email template with data from the request body
+    // const emailHtml = emailTemplate.replace(/{{name}}/g, req.body.name);
+    //
+    // // Create a transporter object to send the email
+    // // const transporter = nodemailer.createTransport({
+    // //     service: 'gmail',
+    // //     auth: {
+    // //         user: 'asiedukevin050@gmail.com',
+    // //         pass: 'Godbless2019'
+    // //     }
+    // // });
+    //
+    // // const mailOptions = {
+    // //     host: process.env.SMTP_HOST || "smtp.mailtrap.io",
+    // //     port: parseInt(process.env.SMTP_PORT || "2525"),
+    // //     secure: false,
+    // //     auth: {
+    // //         user: process.env.SMTP_USER || "e7a68055d630f3",
+    // //         pass: process.env.SMTP_PASSWORD || "74f0aeb20695c9",
+    // //     },
+    // // }
     const mailOptions = {
         host: "smtp.gmail.com",
-        port: 465,
+        port: 587,
         auth: {
             user: 'asiedukevin050@gmail.com',
             pass: 'fsoaflmydvqcmccd'
@@ -82,15 +85,29 @@ app.post('/send-email' ,(req, res, next) => {
         ...mailOptions,
     })
 
+    const mjmlTemplate = fs.readFileSync('./templates/template.mjml', 'utf-8');
+
+// compile the MJML template to HTML
+    const { html } = mjml2html(mjmlTemplate);
+
+// define your Mustache data object
+    const dat = {
+        name: 'John Doe',
+        message: 'This is a test email'
+    };
+
+// compile the HTML with Mustache data
+    const compiledHtml = Mustache.render(html, dat);
+
     // Define the email data
     const data = {
         from: 'hello@masewa.co',
         to: req.body.email,
         subject: 'Bienvenue',
-        html: emailHtml
+        html: compiledHtml
     };
 
-    // Send the email
+    // // Send the email
     transporter.sendMail(data, (error, info) => {
         if (error) {
             console.error(error);

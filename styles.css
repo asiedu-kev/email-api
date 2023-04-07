@@ -1,18 +1,39 @@
 @font-face {
     font-family: "Milligram Text Regular";
-    src: url("./public/fonts/Milligram/MilligramText-Regular.ttf");
+    src: url("https://email-api-puqm.onrender.com/static/fonts/Milligram/MilligramText-Regular.ttf");
 }
 
 @font-face {
     font-family: "Milligram Text Medium";
-    src: url("./public/fonts/Milligram/MilligramText-Medium.ttf");
+    src: url("https://email-api-puqm.onrender.com/static/fonts/Milligram/MilligramText-Medium.ttf");
 }
 
 body {
-    font-family: "Cascadia Mono";
+    font-family: "Milligram Text Regular";
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h3 {
+    font-family: "Milligram Text Medium";
+}
+
+.title {
+    font-family: "Milligram Text Medium";
+    font-size: 1.125rem;
+}
+
+.founder {
     font-weight: bold;
 }
 
-p {
-    font-size: 5px;
+.icons_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 5rem;
+    margin-top: 2rem;
+    margin-inline: 0.7rem;
 }

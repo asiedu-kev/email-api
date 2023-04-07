@@ -1,0 +1,10 @@
+<mjml>
+  <mj-body>
+    <mj-section>
+      <mj-column>
+        <mj-image width="200px" src="https://email-api-puqm.onrender.com/static/icons/logo%20masewa%20version%20noir.png"></mj-image>
+        <mj-divider border-color="#eee"></mj-divider>
+      </mj-column>
+    </mj-section>
+  </mj-body>
+</mjml>
