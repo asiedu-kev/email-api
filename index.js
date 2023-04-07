@@ -41,7 +41,9 @@ app.get('/',function(req,res, next){
 });
 
 // POST endpoint to send an email
-app.post('/send-email', cors() ,(req, res, next) => {
+app.post('/send-email' ,(req, res, next) => {
+
+    console.log(req.body);
     // Read the email template file
     const emailTemplate = fs.readFileSync('email-template.html', 'utf8');
 
@@ -57,14 +59,22 @@ app.post('/send-email', cors() ,(req, res, next) => {
     //     }
     // });
 
+    // const mailOptions = {
+    //     host: process.env.SMTP_HOST || "smtp.mailtrap.io",
+    //     port: parseInt(process.env.SMTP_PORT || "2525"),
+    //     secure: false,
+    //     auth: {
+    //         user: process.env.SMTP_USER || "e7a68055d630f3",
+    //         pass: process.env.SMTP_PASSWORD || "74f0aeb20695c9",
+    //     },
+    // }
     const mailOptions = {
-        host: process.env.SMTP_HOST || "smtp.mailtrap.io",
-        port: parseInt(process.env.SMTP_PORT || "2525"),
-        secure: false,
+        host: "smtp.gmail.com",
+        port: 465,
         auth: {
-            user: process.env.SMTP_USER || "e7a68055d630f3",
-            pass: process.env.SMTP_PASSWORD || "74f0aeb20695c9",
-        },
+            user: 'asiedukevin050@gmail.com',
+            pass: 'fsoaflmydvqcmccd'
+        }
     }
 
     // Create a transporter object to send the email
@@ -74,9 +84,9 @@ app.post('/send-email', cors() ,(req, res, next) => {
 
     // Define the email data
     const data = {
-        from: 'reply@gmail.com',
+        from: 'hello@masewa.co',
         to: req.body.email,
-        subject: 'Test Email',
+        subject: 'Bienvenue',
         html: emailHtml
     };
 
