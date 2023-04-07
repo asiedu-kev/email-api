@@ -6,24 +6,27 @@ const path = require("path");
 const cors = require("cors");
 
 const app = express();
-
-app.use('/static', express.static(__dirname + '/public'));
 // Parse incoming request bodies as JSON
 app.use(bodyParser.json());
+app.use(express.urlencoded({ extended: false }));
 
-app.use(cors({
-    origin: '*'
-}));
 
-app.get('/',function(req,res){
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", '*'); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+});
+
+app.use('/static', express.static(__dirname + '/public'));
+
+
+app.get('/',function(req,res, next){
     res.sendFile(path.join(__dirname+'/email-template.html'));
     //__dirname : It will resolve to your project folder.
 });
 
 // POST endpoint to send an email
-app.post('/send-email',cors({
-    origin: '*'
-}), (req, res) => {
+app.post('/send-email', (req, res, next) => {
     // Read the email template file
     const emailTemplate = fs.readFileSync('email-template.html', 'utf8');
 
