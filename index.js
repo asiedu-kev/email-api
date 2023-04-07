@@ -41,7 +41,7 @@ app.get('/',function(req,res, next){
 });
 
 // POST endpoint to send an email
-app.post('/send-email', (req, res, next) => {
+app.post('/send-email', cors() ,(req, res, next) => {
     // Read the email template file
     const emailTemplate = fs.readFileSync('email-template.html', 'utf8');
 
