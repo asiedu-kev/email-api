@@ -45,38 +45,12 @@ app.get('/',function(req,res, next){
 // POST endpoint to send an email
 app.post('/send-email' ,async (req, res, next) => {
     console.log("i")
-
-    // console.log(req.body);
-    // // Read the email template file
-    // const emailTemplate = fs.readFileSync('email-template.html', 'utf8');
-    //
-    // // Replace placeholders in the email template with data from the request body
-    // const emailHtml = emailTemplate.replace(/{{name}}/g, req.body.name);
-    //
-    // // Create a transporter object to send the email
-    // // const transporter = nodemailer.createTransport({
-    // //     service: 'gmail',
-    // //     auth: {
-    // //         user: 'asiedukevin050@gmail.com',
-    // //         pass: 'Godbless2019'
-    // //     }
-    // // });
-    //
-    // // const mailOptions = {
-    // //     host: process.env.SMTP_HOST || "smtp.mailtrap.io",
-    // //     port: parseInt(process.env.SMTP_PORT || "2525"),
-    // //     secure: false,
-    // //     auth: {
-    // //         user: process.env.SMTP_USER || "e7a68055d630f3",
-    // //         pass: process.env.SMTP_PASSWORD || "74f0aeb20695c9",
-    // //     },
-    // // }
     const mailOptions = {
-        host: "smtp.gmail.com",
+        host: process.env.SMTP_HOST ,
         port: 587,
         auth: {
-            user: 'asiedukevin050@gmail.com',
-            pass: 'fsoaflmydvqcmccd'
+            user: process.env.SMTP_USER ,
+            pass: process.env.SMTP_PASSWORD 
         }
     }
 
